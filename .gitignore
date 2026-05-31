@@ -25,4 +25,5 @@ replay_pid*
 
 # Os arquivos de páginas criados no diretório_das_paginas, 
 # que são gerados em tempo de execução e não devem ser versionados
+./diretorio_das_paginas
 *.pag
