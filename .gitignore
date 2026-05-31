@@ -23,4 +23,6 @@
 hs_err_pid*
 replay_pid*
 
-*.pag // ignora os arquivos de páginas criados no diretório_das_paginas, que são gerados em tempo de execução e não devem ser versionados
+# Os arquivos de páginas criados no diretório_das_paginas, 
+# que são gerados em tempo de execução e não devem ser versionados
+*.pag
