@@ -10,9 +10,12 @@ import java.nio.file.attribute.BasicFileAttributes;
 import vigesissexagesimal.Vigesissexagesimal;
 
 public class DiretorioService {
-    private static Vigesissexagesimal conteudo; // classe responsável por gerar conteúdo único para cada página, garantindo que cada arquivo tenha um conteúdo distinto
+    private DiretorioService() {
+        /* This utility class should not be instantiated */
+    }
 
     public static void preencherDiretorio(Path diretorio, int numeroPaginasUnicas) {
+        Vigesissexagesimal conteudo; 
         conteudo = new Vigesissexagesimal(); // inicializa a instância para começar a gerar conteúdo único
 
         try {
