@@ -14,15 +14,16 @@ public class DiretorioService {
         /* This utility class should not be instantiated */
     }
 
-    public static void preencherDiretorio(Path diretorio, int numeroPaginasUnicas) {
+    public static void preencheMemoriaPrincipal(Path diretorio, char[][] memoriaPrincipal) {
         Vigesissexagesimal conteudo; 
         conteudo = new Vigesissexagesimal(); // inicializa a instância para começar a gerar conteúdo único
 
         try {
             criarDiretorio(diretorio);
-            for (int i = 0; i < numeroPaginasUnicas; i++) {
+            for (int i = 0; i < memoriaPrincipal.length; i++) {
 
                 criarArquivo(diretorio.resolve(i + ".pag"), conteudo.toString());
+                System.arraycopy(conteudo.toString().toCharArray(), 0, memoriaPrincipal[i], 0, 10);
                 conteudo.incrementa();
             }
         } catch (IOException e) {
