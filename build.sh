@@ -6,6 +6,7 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 SRC_DIR="$SCRIPT_DIR/src"
 OUT_DIR="$SCRIPT_DIR/out"
 JAR_NAME="$SCRIPT_DIR/PageSimulator.jar"
+DIR_PAGES="$SCRIPT_DIR/diretorio_das_paginas"
 
 if [[ "${1:-}" == "clean" ]]; then
     echo "Cleaning..."
@@ -15,6 +16,7 @@ if [[ "${1:-}" == "clean" ]]; then
 fi
 
 mkdir -p "$OUT_DIR"
+mkdir -p "$DIR_PAGES"
 
 echo "Compiling..."
 
@@ -23,6 +25,6 @@ javac -d "$OUT_DIR" $(find "$SRC_DIR" -name "*.java")
 
 echo "Packaging JAR..."
 # Set the Main-Class to the package present in src (pagesimulator.Main)
-jar --create --file "$JAR_NAME" --main-class=pagesimulator.Main -C "$OUT_DIR" .
+jar --create --file "$JAR_NAME" --main-class=pagesimulator.PageSimulator -C "$OUT_DIR" .
 
 echo "Built $JAR_NAME"

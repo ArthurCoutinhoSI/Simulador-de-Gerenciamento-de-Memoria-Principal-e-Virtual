@@ -1,9 +1,11 @@
 package diretorio;
 
 import java.io.IOException;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 
 import vigesissexagesimal.Vigesissexagesimal;
 
@@ -16,7 +18,6 @@ public class DiretorioService {
         try {
             criarDiretorio(diretorio);
             for (int i = 0; i < numeroPaginasUnicas; i++) {
-                // System.out.println(diretorio + " preencherDiretorio " + numeroPaginasUnicas);
 
                 criarArquivo(diretorio.resolve(i + ".pag"), conteudo.toString());
                 conteudo.incrementa();
@@ -29,17 +30,23 @@ public class DiretorioService {
     private static void criarDiretorio(Path caminho) throws IOException {
         if (Files.exists(caminho)) {
             if (Files.isDirectory(caminho)) {
-                Files.walk(caminho)
-                        .sorted(Comparator.reverseOrder()) // garante que arquivos sejam deletados antes dos diretórios pra não dar erro
-                        .forEach(path -> {
-                            try {
-                                Files.deleteIfExists(path);
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        });
+                Files.walkFileTree(caminho, new SimpleFileVisitor<Path>() {
+                    @Override
+                    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                        Files.delete(file);
+                        return FileVisitResult.CONTINUE;
+                    }
+
+                    @Override
+                    public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                        if (!dir.equals(caminho)) {
+                            Files.delete(dir);
+                        }
+                        return FileVisitResult.CONTINUE;
+                    }
+                });
             } else {
-                Files.deleteIfExists(caminho);
+                Files.delete(caminho);
             }
         }
         Files.createDirectories(caminho);

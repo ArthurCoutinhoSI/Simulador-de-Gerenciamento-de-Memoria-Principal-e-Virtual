@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 
 import diretorio.DiretorioService;
 
-public class Main {
+public class PageSimulator {
     public static void main(String[] args) {
         Path diretorio = Paths.get(args[0]);
         int quantidadePaginasUnicas = Integer.parseInt(args[1]);
