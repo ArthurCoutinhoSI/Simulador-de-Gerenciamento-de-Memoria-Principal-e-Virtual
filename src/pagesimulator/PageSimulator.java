@@ -6,6 +6,7 @@ import java.util.Random;
 
 import diretorio.DiretorioService;
 import memoriaprincipal.MemoriaPrincipal;
+import memoriavirtual.MemoriaVirtual;
 
 public class PageSimulator {
     public static void main(String[] args) {
@@ -16,9 +17,9 @@ public class PageSimulator {
         int quantidadePaginasRequeridas = Integer.parseInt(args[4]);
 
         MemoriaPrincipal memoriaPrincipal = new MemoriaPrincipal(quantidadeFramesMemoria);
-        char[][] memoriaVirtual = new char[quantidadePaginasUnicas][10]; // cada página tem 10 caracteres
+        MemoriaVirtual memoriaVirtual = new MemoriaVirtual(quantidadePaginasUnicas);
 
-        DiretorioService.preencheMemoriaPrincipal(diretorio, memoriaPrincipal.getFrames()); // preenche o diretório simulando memoria principal
+        DiretorioService.preencheMemoriaPrincipal(diretorio, memoriaVirtual.getPaginas()); // preenche o diretório simulando memoria principal
 
         while (quantidadePaginasRequeridas > 0) {
             // lógica para simular o acesso às páginas, utilizando a estratégia de substituição escolhida
@@ -29,12 +30,12 @@ public class PageSimulator {
             // System.out.println("Simulando acesso às páginas... (a lógica de acesso e substituição deve ser implementada aqui)");
             // System.out.println("Estratégia de substituição: " + estrategia);
             // System.out.println("Memória Principal:");
-            // for (int i = 0; i < memoriaPrincipal.getMemoriaPrincipal().length; i++) {
-            //     System.out.println("Frame " + i + ": " + new String(memoriaPrincipal.getMemoriaPrincipal()[i]));
+            // for (int i = 0; i < memoriaPrincipal.getFrames().length; i++) {
+            //     System.out.println("Frame " + i + ": " + new String(memoriaPrincipal.getFrames()[i]));
             // }
             // System.out.println("Memória Virtual:");
-            // for (int i = 0; i < memoriaVirtual.length; i++) {
-            //     System.out.println("Página " + i + ": " + new String(memoriaVirtual[i]));
+            // for (int i = 0; i < memoriaVirtual.getPaginas().length; i++) {
+            //     System.out.println("Página " + i + ": " + new String(memoriaVirtual.getPaginas()[i]));
             // }
 
 
