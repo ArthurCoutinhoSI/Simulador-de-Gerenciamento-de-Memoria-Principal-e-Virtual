@@ -6,7 +6,7 @@ public class Vigesissexagesimal {
     private int[] caracteres;
 
     public Vigesissexagesimal(){
-        caracteres = new int[26];
+        caracteres = new int[5]; // 5 caracteres para garantir 26^5 combinações únicas, o que é mais do que suficiente para os arquivos de página
         for (int i = 0; i < caracteres.length; i++) {
             caracteres[i] = 97;
         }
