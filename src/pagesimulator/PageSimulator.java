@@ -7,6 +7,7 @@ import java.util.Random;
 import diretorio.DiretorioService;
 import memoriaprincipal.MemoriaPrincipal;
 import memoriavirtual.MemoriaVirtual;
+import pagetable.PageTable;
 
 public class PageSimulator {
     public static void main(String[] args) {
@@ -18,6 +19,7 @@ public class PageSimulator {
 
         MemoriaPrincipal memoriaPrincipal = new MemoriaPrincipal(quantidadeFramesMemoria);
         MemoriaVirtual memoriaVirtual = new MemoriaVirtual(quantidadePaginasUnicas);
+        PageTable pageTable = new PageTable(memoriaPrincipal.getFrames().length); 
 
         DiretorioService.preencheMemoriaPrincipal(diretorio, memoriaVirtual.getPaginas()); // preenche o diretório simulando memoria principal
 
@@ -26,18 +28,15 @@ public class PageSimulator {
             // e atualizando a memória principal e virtual conforme necessário
             // isso pode incluir a leitura de arquivos de página, a atualização do diretório, etc
 
-
-            // System.out.println("Simulando acesso às páginas... (a lógica de acesso e substituição deve ser implementada aqui)");
-            // System.out.println("Estratégia de substituição: " + estrategia);
-            // System.out.println("Memória Principal:");
-            // for (int i = 0; i < memoriaPrincipal.getFrames().length; i++) {
-            //     System.out.println("Frame " + i + ": " + new String(memoriaPrincipal.getFrames()[i]));
-            // }
-            // System.out.println("Memória Virtual:");
-            // for (int i = 0; i < memoriaVirtual.getPaginas().length; i++) {
-            //     System.out.println("Página " + i + ": " + new String(memoriaVirtual.getPaginas()[i]));
-            // }
-
+            // 1. Encontre o local da página desejada no disco
+            // 2 Se há um frame livre, use-o
+            // 3 Se não há frame livre
+            // - Use um algoritmo de substituição de página para selecionar um
+            //      frame vítima
+            // - Escreva o frame vítima no disco e altere as tabelas de frame
+            //      apropriadamente
+            // 4 Carregue a página desejada no frame livre e altere as tabelas
+            // de frame e de página apropriadamente
 
             quantidadePaginasRequeridas--;
         }

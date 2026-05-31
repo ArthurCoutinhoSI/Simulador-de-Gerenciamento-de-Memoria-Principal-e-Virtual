@@ -6,7 +6,7 @@ public class Vigesissexagesimal {
     private int[] caracteres;
 
     public Vigesissexagesimal(){
-        caracteres = new int[5]; // 5 caracteres para garantir 26^5 combinações únicas, o que é mais do que suficiente para os arquivos de página
+        caracteres = new int[10]; // 10 caracteres para garantir 26^10 combinações únicas, o que é mais do que suficiente para os arquivos de página
         for (int i = 0; i < caracteres.length; i++) {
             caracteres[i] = 97;
         }
@@ -17,7 +17,6 @@ public class Vigesissexagesimal {
         for (int i = 0; i < caracteres.length; i++) {
             sb.append((char) caracteres[i]);
         }
-        sb.append(sb.toString()); // duplica o conteúdo para garantir 10 caracteres
         return sb.toString();
     }
 
