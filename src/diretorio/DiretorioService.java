@@ -14,6 +14,14 @@ public class DiretorioService {
         /* This utility class should not be instantiated */
     }
 
+    public static int buscarPaginaNoDiretorio(Path diretorio, int pagina) {
+        Path arquivoPagina = diretorio.resolve(pagina + ".pag");
+        if (Files.exists(arquivoPagina)) {
+            return pagina; // Retorna o número da página se o arquivo existir
+        }
+        return -1; // Retorna -1 se a página não for encontrada
+    }
+
     public static void preencheMemoriaPrincipal(Path diretorio, char[][] memoriaPrincipal) {
         Vigesissexagesimal conteudo; 
         conteudo = new Vigesissexagesimal(); // inicializa a instância para começar a gerar conteúdo único
