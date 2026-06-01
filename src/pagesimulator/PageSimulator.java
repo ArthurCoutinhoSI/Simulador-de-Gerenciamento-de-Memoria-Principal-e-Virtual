@@ -23,22 +23,23 @@ public class PageSimulator {
 
         Scanner scanner = new Scanner(System.in);
 
-        SubstituidorPagina substituidor = new SubstituidorPagina(null);
-        switch (estrategia.toLowerCase()) {
-            case "fifo":
-                substituidor.setEstrategia(new EstrategiaFifo(quantidadeFramesMemoria));
-                break;
-            // outros casos para diferentes estratégias de substituição de página podem ser adicionados aqui
-            default:
-                System.out.println("Estratégia de substituição de página desconhecida. Usando FIFO por padrão.");
-                substituidor.setEstrategia(new EstrategiaFifo(quantidadeFramesMemoria));
-                break;
-        }
         MemoriaPrincipal memoriaPrincipal = new MemoriaPrincipal(quantidadeFramesMemoria);
         MemoriaVirtual memoriaVirtual = new MemoriaVirtual(quantidadePaginasUnicas);
         PageTable pageTable = new PageTable(memoriaPrincipal.getFrames().length); 
 
         DiretorioService.preencheMemoriaPrincipal(diretorio, memoriaVirtual.getPaginas()); // preenche o diretório simulando memoria principal
+
+        SubstituidorPagina substituidor = new SubstituidorPagina(null);
+        switch (estrategia.toLowerCase()) {
+            case "fifo":
+                substituidor.setEstrategia(new EstrategiaFifo(pageTable.getFrames()));
+                break;
+            // outros casos para diferentes estratégias de substituição de página podem ser adicionados aqui
+            default:
+                System.out.println("Estratégia de substituição de página desconhecida. Usando FIFO por padrão.");
+                substituidor.setEstrategia(new EstrategiaFifo(pageTable.getFrames()));
+                break;
+        }
 
         while (quantidadePaginasRequeridas > 0) {
             // lógica para simular o acesso às páginas, utilizando a estratégia de substituição escolhida
@@ -47,17 +48,7 @@ public class PageSimulator {
 
             int paginasRequeridas = scanner.nextInt(); // aguarda o usuário pressionar Enter para simular o próximo acesso à página
             
-            // 1. Encontre o local da página desejada no disco
-            int paginaEncontrada = DiretorioService.buscarPaginaNoDiretorio(diretorio, paginasRequeridas);
-
-            // 2 Se há um frame livre, use-o
-            // 3 Se não há frame livre
-            // - Use um algoritmo de substituição de página para selecionar um
-            //      frame vítima
-            // - Escreva o frame vítima no disco e altere as tabelas de frame
-            //      apropriadamente
-            // 4 Carregue a página desejada no frame livre e altere as tabelas
-            // de frame e de página apropriadamente
+            
 
             quantidadePaginasRequeridas--;
         }

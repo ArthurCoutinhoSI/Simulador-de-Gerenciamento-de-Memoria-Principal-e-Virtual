@@ -1,5 +1,7 @@
 package memoriaprincipal;
 
+import diretorio.DiretorioService;
+
 public class MemoriaPrincipal {
     private char[][] frames;
 
@@ -13,6 +15,33 @@ public class MemoriaPrincipal {
 
     public void setFrame(int index, char[] frame) {
         this.frames[index] = frame;
+    }
+
+    public boolean temFrameLivre() {
+        for (char[] frame : frames) {
+            if (frame == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getFrameLivre() {
+        for (int i = 0; i < frames.length; i++) {
+            if (frames[i] == null) {
+                return i;
+            }
+        }
+        return -1; // Nenhum frame livre encontrado
+    }
+
+    public void carregarPagina(int pagina, int frame) {
+        // Simula o carregamento da página no frame, preenchendo com caracteres representativos
+        char[] conteudoPagina = DiretorioService.lerPaginaDoDiretorio(null, pagina);
+        for (int i = 0; i < conteudoPagina.length; i++) {
+            conteudoPagina[i] = (char) ('A' + (pagina % 26)); // Exemplo de conteúdo da página
+        }
+        setFrame(frame, conteudoPagina);
     }
 
     @Override

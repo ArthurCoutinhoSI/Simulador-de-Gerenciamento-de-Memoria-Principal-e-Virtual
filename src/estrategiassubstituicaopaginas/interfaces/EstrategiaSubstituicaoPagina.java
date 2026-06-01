@@ -1,5 +1,5 @@
 package estrategiassubstituicaopaginas.interfaces;
 
 public interface EstrategiaSubstituicaoPagina {
-    public void substituirPagina(int pagina, int frame);
+    public int substituirPagina(int pagina, int frame);
 }

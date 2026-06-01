@@ -14,12 +14,17 @@ public class DiretorioService {
         /* This utility class should not be instantiated */
     }
 
-    public static int buscarPaginaNoDiretorio(Path diretorio, int pagina) {
+    public static char[] buscarPaginaNoDiretorio(Path diretorio, int pagina) {
         Path arquivoPagina = diretorio.resolve(pagina + ".pag");
         if (Files.exists(arquivoPagina)) {
-            return pagina; // Retorna o número da página se o arquivo existir
+            try {
+                return Files.readAllBytes(arquivoPagina).toString().toCharArray();
+            } catch (IOException e) {
+                System.err.println("Erro ao ler página do diretório: " + e.getMessage());
+                return new char[10]; // Retorna um array vazio em caso de erro
+            }
         }
-        return -1; // Retorna -1 se a página não for encontrada
+        return new char[10]; // Retorna um array vazio se a página não for encontrada
     }
 
     public static void preencheMemoriaPrincipal(Path diretorio, char[][] memoriaPrincipal) {
