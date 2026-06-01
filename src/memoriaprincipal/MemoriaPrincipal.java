@@ -1,5 +1,7 @@
 package memoriaprincipal;
 
+import java.nio.file.Path;
+
 import diretorio.DiretorioService;
 
 public class MemoriaPrincipal {
@@ -35,9 +37,9 @@ public class MemoriaPrincipal {
         return -1; // Nenhum frame livre encontrado
     }
 
-    public void carregarPagina(int pagina, int frame) {
+    public void carregarPagina(int pagina, int frame, Path diretorio) {
         // Simula o carregamento da página no frame, preenchendo com caracteres representativos
-        char[] conteudoPagina = DiretorioService.lerPaginaDoDiretorio(null, pagina);
+        char[] conteudoPagina = DiretorioService.buscarPaginaNoDiretorio(diretorio, pagina);
         for (int i = 0; i < conteudoPagina.length; i++) {
             conteudoPagina[i] = (char) ('A' + (pagina % 26)); // Exemplo de conteúdo da página
         }

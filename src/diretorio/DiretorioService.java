@@ -27,16 +27,15 @@ public class DiretorioService {
         return new char[10]; // Retorna um array vazio se a página não for encontrada
     }
 
-    public static void preencheMemoriaPrincipal(Path diretorio, char[][] memoriaPrincipal) {
+    public static void preencheMemoriaPrincipal(Path diretorio, int quantidadePaginas) {
         Vigesissexagesimal conteudo; 
         conteudo = new Vigesissexagesimal(); // inicializa a instância para começar a gerar conteúdo único
 
         try {
             criarDiretorio(diretorio);
-            for (int i = 0; i < memoriaPrincipal.length; i++) {
+            for (int i = 0; i < quantidadePaginas; i++) {
 
                 criarArquivo(diretorio.resolve(i + ".pag"), conteudo.toString());
-                System.arraycopy(conteudo.toString().toCharArray(), 0, memoriaPrincipal[i], 0, 10);
                 conteudo.incrementa();
             }
         } catch (IOException e) {

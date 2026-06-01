@@ -9,7 +9,6 @@ import diretorio.DiretorioService;
 import estrategiassubstituicaopaginas.SubstituidorPagina;
 import estrategiassubstituicaopaginas.estrategias.EstrategiaFifo;
 import memoriaprincipal.MemoriaPrincipal;
-import memoriavirtual.MemoriaVirtual;
 import pagetable.PageTable;
 import relatorio.Relatorio;
 
@@ -24,10 +23,8 @@ public class PageSimulator {
         Scanner scanner = new Scanner(System.in);
 
         MemoriaPrincipal memoriaPrincipal = new MemoriaPrincipal(quantidadeFramesMemoria);
-        MemoriaVirtual memoriaVirtual = new MemoriaVirtual(quantidadePaginasUnicas);
         PageTable pageTable = new PageTable(memoriaPrincipal.getFrames().length); 
-
-        DiretorioService.preencheMemoriaPrincipal(diretorio, memoriaVirtual.getPaginas()); // preenche o diretório simulando memoria principal
+        DiretorioService.preencheMemoriaPrincipal(diretorio, quantidadePaginasUnicas); // preenche o diretório simulando o disco / memoria virtual
 
         SubstituidorPagina substituidor = new SubstituidorPagina(null);
         switch (estrategia.toLowerCase()) {
