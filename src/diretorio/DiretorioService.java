@@ -10,24 +10,32 @@ import java.nio.file.attribute.BasicFileAttributes;
 import vigesissexagesimal.Vigesissexagesimal;
 
 public class DiretorioService {
+    private static Path diretorio;
+
     private DiretorioService() {
         /* This utility class should not be instantiated */
     }
 
-    public static char[] buscarPaginaNoDiretorio(Path diretorio, int pagina) {
-        Path arquivoPagina = diretorio.resolve(pagina + ".pag");
-        if (Files.exists(arquivoPagina)) {
-            try {
-                return Files.readAllBytes(arquivoPagina).toString().toCharArray();
-            } catch (IOException e) {
-                System.err.println("Erro ao ler página do diretório: " + e.getMessage());
-                return new char[10]; // Retorna um array vazio em caso de erro
-            }
+    public static char[] buscarConteudoPaginaNoDiretorio(int pagina) {
+        if (diretorio == null) {
+            return new char[0];
         }
-        return new char[10]; // Retorna um array vazio se a página não for encontrada
+
+        Path arquivoPagina = diretorio.resolve(pagina + ".pag");
+        if (!Files.exists(arquivoPagina)) {
+            return new char[0];
+        }
+
+        try {
+            return Files.readString(arquivoPagina).toCharArray();
+        } catch (IOException e) {
+            System.err.println("Erro ao ler página: " + e.getMessage());
+            return new char[0];
+        }
     }
 
-    public static void preencheMemoriaPrincipal(Path diretorio, int quantidadePaginas) {
+    public static void inicializarArquivosEmDisco(String diretorioString, int quantidadePaginas) {
+        diretorio = Path.of(diretorioString);
         Vigesissexagesimal conteudo; 
         conteudo = new Vigesissexagesimal(); // inicializa a instância para começar a gerar conteúdo único
 

@@ -3,13 +3,8 @@ package estrategiassubstituicaopaginas.estrategias;
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 
 public class EstrategiaFifo implements EstrategiaSubstituicaoPagina {
-    private int[] fila;
-    private int indice;
 
-    public EstrategiaFifo(int[] framesPageTable) {
-        this.fila = framesPageTable; // a fila é inicializada com os frames da tabela de páginas
-        this.indice = 0;
-    }   
+    public EstrategiaFifo() {}   
 
     // nesse caso, a o metodo substitui ou adiciona a pagina no frame livre, e retorna a pagina que foi substituida, caso haja necessidade de substituição
     @Override
