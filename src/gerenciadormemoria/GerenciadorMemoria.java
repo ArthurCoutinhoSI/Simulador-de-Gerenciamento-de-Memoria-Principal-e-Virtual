@@ -41,8 +41,9 @@ public class GerenciadorMemoria {
     public void executarSimulacao(int n){
         while (n > 0){
             int paginaRequerida = scanner.nextInt();
+            System.out.println("Página Requerida: " + paginaRequerida);
 
-            if(pageTable.findIndexOfFrame(paginaRequerida) != -1){
+            if(pageTable.getFrameByIndex(paginaRequerida) != -1){
                 // acesso foi feito com sucesso
                 continue;
             }

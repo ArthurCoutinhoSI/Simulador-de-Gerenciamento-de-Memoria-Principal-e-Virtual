@@ -35,4 +35,12 @@ public class PageTable {
 		}
 		return -1;
 	}
+
+	public int getFrameByIndex(int index){
+		return pageTable[index].getFrame();
+	}
+
+	public String toString(){
+		return "";
+	}
 }
