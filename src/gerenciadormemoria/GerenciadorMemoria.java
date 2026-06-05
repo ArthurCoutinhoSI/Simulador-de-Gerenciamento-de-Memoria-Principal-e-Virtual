@@ -53,26 +53,16 @@ public class GerenciadorMemoria {
             if(indexDoFrameLivre == -1){ //significa que ta cheio
                 int indexDoFrameremovido = pageTable.softRemoveByFrame(estrategia.remove());
                 memoriaPrincipal.removePaginaDaMemoriaPorframe(indexDoFrameremovido);
-                // aqui escreveria devolta oq esta na memoria para o disco/memoria virtual
+                // aqui escreveria de volta oq esta na memoria para o disco/memoria virtual
             }
 
             estrategia.add(indexDoFrameLivre);
             pageTable.add(paginaRequerida, indexDoFrameLivre);
             memoriaPrincipal.inserePaginaNaMemoria(paginaRequerida, indexDoFrameLivre);
 
-            System.out.println(this.toString());
-            System.out.println(n);
+            System.out.println(pageTable.toString());
 
             n -= 1;
         }
-    }
-
-    @Override
-    public String toString(){
-        return "GerenciadorMemoria{" +
-                "memoriaRAM=" + memoriaPrincipal.getMemoriaPrincipal().length + " frames" +
-                ", pageTable=" + pageTable +
-                ", estrategia=" + estrategia +
-                '}';
     }
 }

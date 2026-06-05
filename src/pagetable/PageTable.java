@@ -1,27 +1,29 @@
 package pagetable;
 
+import diretorio.DiretorioService;
+
 public class PageTable {
 	// tabela hash do diretorio
-	PageTableObject[] pageTable;
+	PageTableObject[] pageTableObjects;
 
 	public PageTable(int n){
-		this.pageTable = new PageTableObject[n];
+		this.pageTableObjects = new PageTableObject[n];
 		this.instanciaPageTableObjects(); // isso é necessário pra não ficar um vetor de nulls, já que é um vetor de objetos
 	}
 
 	private void instanciaPageTableObjects(){
-		for (int i = 0; i < pageTable.length; i++) {
-			this.pageTable[i] = new PageTableObject();
+		for (int i = 0; i < pageTableObjects.length; i++) {
+			this.pageTableObjects[i] = new PageTableObject();
 		}
 	}
 
 	public boolean add(int index, int frame){
-		if(index > pageTable.length - 1 || index < 0){
+		if(index > pageTableObjects.length - 1 || index < 0){
 			return false;
 		}
 
-		pageTable[index].setFrame(frame);
-		pageTable[index].setEstaPresente(true);
+		pageTableObjects[index].setFrame(frame);
+		pageTableObjects[index].setEstaPresente(true);
 		
 		return true;
 	}
@@ -30,13 +32,13 @@ public class PageTable {
 
 		int index = findIndexOfFrame(frame);
 
-		pageTable[index].setEstaPresente(false);
+		pageTableObjects[index].setEstaPresente(false);
 		return index;
 	}
 
 	public int findIndexOfFrame(int frame) {
-		for (int i = 0; i < pageTable.length; i++) {
-			if(pageTable[i].getFrame() == frame && pageTable[i].getEstaPresente()){
+		for (int i = 0; i < pageTableObjects.length; i++) {
+			if(pageTableObjects[i].getFrame() == frame && pageTableObjects[i].getEstaPresente()){
 				return i;
 			}
 		}
@@ -44,10 +46,29 @@ public class PageTable {
 	}
 
 	public int getFrameByIndex(int index){
-		return pageTable[index].getFrame();
+		if (pageTableObjects[index].getEstaPresente()) {
+			return pageTableObjects[index].getFrame();
+		}
+		return -1;
 	}
 
+	@Override
 	public String toString(){
-		return "";
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("Frame\t\tPágina\t\tConteúdo\n");
+		for (int i = 0; i < pageTableObjects.length; i++) {
+			if(pageTableObjects[i].getEstaPresente()){
+				
+				sb.append(pageTableObjects[i].getFrame());
+				sb.append("\t\t");
+				sb.append(i);
+				sb.append("\t\t");
+				sb.append(DiretorioService.buscarConteudoPaginaNoDiretorio(i));
+				sb.append("\n");
+			}
+		}
+		
+		return sb.toString();
 	}
 }
