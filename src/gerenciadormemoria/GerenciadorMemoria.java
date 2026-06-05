@@ -5,18 +5,19 @@ import java.util.Scanner;
 import diretorio.DiretorioService;
 import estrategiassubstituicaopaginas.estrategias.EstrategiaFifo;
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
+import memoriaprincipal.MemoriaPrincipal;
 import pagetable.PageTable;
 
 public class GerenciadorMemoria {
     // Estado do sistema (contexto do strategy)
-    private char[][] memoriaPrincipal;
+    private MemoriaPrincipal memoriaPrincipal;
     private PageTable pageTable;
     private EstrategiaSubstituicaoPagina estrategia;
     private Scanner scanner;
 
     public GerenciadorMemoria(String estrategia, int qtdFrames, int paginasUnicas, String diretorio) {
         this.strategyBuilder(estrategia);
-        this.memoriaPrincipal = new char[qtdFrames][10];
+        this.memoriaPrincipal = new MemoriaPrincipal(qtdFrames);
         this.pageTable = new PageTable(paginasUnicas);
         this.scanner = new Scanner(System.in);
         DiretorioService.inicializarArquivosEmDisco(diretorio, paginasUnicas);
@@ -55,7 +56,7 @@ public class GerenciadorMemoria {
     @Override
     public String toString(){
         return "GerenciadorMemoria{" +
-                "memoriaRAM=" + memoriaPrincipal.length + " frames" +
+                "memoriaRAM=" + memoriaPrincipal.getMemoriaPrincipal().length + " frames" +
                 ", pageTable=" + pageTable +
                 ", estrategia=" + estrategia +
                 '}';
