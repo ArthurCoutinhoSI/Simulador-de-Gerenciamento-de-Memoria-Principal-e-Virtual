@@ -12,10 +12,13 @@ public class EstrategiaFifo implements EstrategiaSubstituicaoPagina {
 	}
 	
 	public void add(int frame){
-		fila.add(frame);
+		fila.addLast(frame);
 	}
 
 	public int remove(){
-		return fila.remove(0);
+		if(fila.isEmpty()) {
+			return -1;
+		}
+		return fila.removeFirst();
 	}
 }

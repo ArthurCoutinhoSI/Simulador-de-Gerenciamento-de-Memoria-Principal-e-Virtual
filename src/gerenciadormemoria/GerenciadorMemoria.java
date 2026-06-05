@@ -13,14 +13,16 @@ public class GerenciadorMemoria {
     private MemoriaPrincipal memoriaPrincipal;
     private PageTable pageTable;
     private EstrategiaSubstituicaoPagina estrategia;
+
     private Scanner scanner;
 
     public GerenciadorMemoria(String estrategia, int qtdFrames, int paginasUnicas, String diretorio) {
         this.strategyBuilder(estrategia);
         this.memoriaPrincipal = new MemoriaPrincipal(qtdFrames);
         this.pageTable = new PageTable(paginasUnicas);
-        this.scanner = new Scanner(System.in);
         DiretorioService.inicializarArquivosEmDisco(diretorio, paginasUnicas);
+        
+        this.scanner = new Scanner(System.in);
     }
 
     private void strategyBuilder(String estrategiaString) {
@@ -45,6 +47,14 @@ public class GerenciadorMemoria {
                 continue;
             }
 
+            int indexDoFrameLivre = memoriaPrincipal.getIndexOfFrameLivre();
+
+            if(indexDoFrameLivre == -1){ //significa que ta cheio
+                int indexDoFrameremovido = pageTable.softRemove(estrategia.remove());
+            }
+
+            estrategia.add(indexDoFrameLivre);
+            pageTable.add(paginaRequerida, indexDoFrameLivre);
 
             System.out.println(this.toString());
             System.out.println(n);

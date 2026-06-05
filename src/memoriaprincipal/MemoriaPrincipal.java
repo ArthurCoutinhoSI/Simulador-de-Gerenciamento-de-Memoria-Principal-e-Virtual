@@ -19,4 +19,11 @@ public class MemoriaPrincipal {
         }
         return -1;// memoria principal cheia
     }
+
+    public boolean removeFrameDaMemoriaPrincipal(int frame){
+        if(frame > memoriaPrincipal.length - 1)
+            return false;
+        memoriaPrincipal[frame][0] = '\u0000';
+        return true;
+    }
 }
