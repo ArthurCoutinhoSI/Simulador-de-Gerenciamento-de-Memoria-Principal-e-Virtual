@@ -51,24 +51,4 @@ public class PageTable {
 		}
 		return -1;
 	}
-
-	@Override
-	public String toString(){
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("Frame\t\tPágina\t\tConteúdo\n");
-		for (int i = 0; i < pageTableObjects.length; i++) {
-			if(pageTableObjects[i].getEstaPresente()){
-				
-				sb.append(pageTableObjects[i].getFrame());
-				sb.append("\t\t");
-				sb.append(i);
-				sb.append("\t\t");
-				sb.append(DiretorioService.buscarConteudoPaginaNoDiretorio(i));
-				sb.append("\n");
-			}
-		}
-		
-		return sb.toString();
-	}
 }

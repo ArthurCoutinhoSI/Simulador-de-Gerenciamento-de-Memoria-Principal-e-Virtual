@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import diretorio.DiretorioService;
 import estrategiassubstituicaopaginas.estrategias.EstrategiaFifo;
+import estrategiassubstituicaopaginas.estrategias.EstrategiaLru;
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 import memoriaprincipal.MemoriaPrincipal;
 import pagetable.PageTable;
@@ -29,6 +30,11 @@ public class GerenciadorMemoria {
         switch (estrategiaString.toLowerCase()) {
             case "fifo":
                 this.estrategia = new EstrategiaFifo();
+                System.out.println("Estratégia Selecionada: FIFO.");
+                break;
+            case "lru":
+                this.estrategia = new EstrategiaLru();
+                System.out.println("Estratégia Selecionada: LRU.");
                 break;
             // outros casos para diferentes estratégias de substituição de página podem ser adicionados aqui
             default:
@@ -45,8 +51,8 @@ public class GerenciadorMemoria {
             System.out.println("Página Requerida: " + paginaRequerida);
 
             if(pageTable.getFrameByIndex(paginaRequerida) != -1){
-                simulaAcesso();
-                System.out.println(pageTable.toString());
+                simulaAcesso(paginaRequerida);
+                System.out.println(this.relatorio());
                 continue;
             }
 
@@ -59,13 +65,15 @@ public class GerenciadorMemoria {
             }
 
 
-            System.out.println(pageTable.toString());
+            System.out.println(this.relatorio());
 
             n -= 1;
         }
     }
 
-    private void simulaAcesso(){
+    private void simulaAcesso(int paginaRequerida){
+        int frame = pageTable.getFrameByIndex(paginaRequerida);
+        estrategia.acessa(frame);
     }
 
     private void carregaPaginaNaMemoriaPrincipal(int indexDoFrameLivre, int paginaRequerida){
@@ -82,6 +90,21 @@ public class GerenciadorMemoria {
         // aqui escreveria de volta oq esta na memoria para o disco/memoria virtual
 
         carregaPaginaNaMemoriaPrincipal(indexDoFrameLivre, paginaRequerida);
-        
+    }
+
+    private String relatorio(){
+        StringBuilder sb = new StringBuilder();
+
+		sb.append("Frame\t\tPágina\t\tConteúdo\n");
+		for (int i = 0; i < memoriaPrincipal.getMemoriaPrincipal().length; i++) {
+            sb.append(i);
+            sb.append("\t\t");
+            sb.append(pageTable.findIndexOfFrame(i));
+            sb.append("\t\t");
+            sb.append(memoriaPrincipal.getMemoriaPrincipal()[i]);
+            sb.append("\n");
+		}
+		
+		return sb.toString();
     }
 }

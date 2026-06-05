@@ -21,4 +21,8 @@ public class EstrategiaFifo implements EstrategiaSubstituicaoPagina {
 		}
 		return fila.removeFirst();
 	}
+
+	public void acessa(int frame){
+		// não faz nada
+	}
 }
