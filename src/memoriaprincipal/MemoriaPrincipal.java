@@ -22,16 +22,16 @@ public class MemoriaPrincipal {
         return -1;// memoria principal cheia
     }
 
-    public void inserePaginaNaMemoria(int paginaRequerida, int indexOfFrameLivre){
-        char[] conteudo = DiretorioService.buscarConteudoPaginaNoDiretorio(paginaRequerida);
+    public void inserePaginaNaMemoria(int paginaRequerida, int indexDoFrameLivre){
+        String conteudo = DiretorioService.buscarConteudoPaginaNoDiretorio(paginaRequerida);
         
-        memoriaPrincipal[indexOfFrameLivre] = conteudo;
+        memoriaPrincipal[indexDoFrameLivre] = conteudo.toCharArray();
     }
 
-    public boolean removePaginaDaMemoriaPorframe(int frame){
-        if(frame > memoriaPrincipal.length - 1 && frame > 0)
+    public boolean removePaginaDaMemoriaPorFrame(int frame){
+        if(frame > this.memoriaPrincipal.length - 1 && frame > 0)
             return false;
-        memoriaPrincipal[frame][0] = '\u0000'; // nota que a verificação da pagina vazia acontece apenas pelo primeiro caractere realmente
+        this.memoriaPrincipal[frame][0] = '\u0000'; // nota que a verificação da pagina vazia acontece apenas pelo primeiro caractere realmente
         return true;
     }
 }

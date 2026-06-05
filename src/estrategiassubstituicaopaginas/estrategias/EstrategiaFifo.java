@@ -16,7 +16,7 @@ public class EstrategiaFifo implements EstrategiaSubstituicaoPagina {
 	}
 
 	public int remove(){
-		if(fila.isEmpty()) {
+	if(fila.isEmpty()) { // isso aqui nem é pra acontecer
 			return -1;
 		}
 		return fila.removeFirst();

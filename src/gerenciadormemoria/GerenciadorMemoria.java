@@ -41,28 +41,47 @@ public class GerenciadorMemoria {
     public void executarSimulacao(int n){
         while (n > 0){
             int paginaRequerida = scanner.nextInt();
+
             System.out.println("Página Requerida: " + paginaRequerida);
 
             if(pageTable.getFrameByIndex(paginaRequerida) != -1){
-                // acesso foi feito com sucesso
+                simulaAcesso();
+                System.out.println(pageTable.toString());
                 continue;
             }
 
             int indexDoFrameLivre = memoriaPrincipal.getIndexOfFrameLivre();
 
-            if(indexDoFrameLivre == -1){ //significa que ta cheio
-                int indexDoFrameremovido = pageTable.softRemoveByFrame(estrategia.remove());
-                memoriaPrincipal.removePaginaDaMemoriaPorframe(indexDoFrameremovido);
-                // aqui escreveria de volta oq esta na memoria para o disco/memoria virtual
+            if(indexDoFrameLivre != -1){ //significa que ta memoriaprincipal não ta cheia
+                carregaPaginaNaMemoriaPrincipal(indexDoFrameLivre, paginaRequerida);
+            }else{
+                substituiPaginaNaMemoriaPrincipal(indexDoFrameLivre, paginaRequerida);
             }
 
-            estrategia.add(indexDoFrameLivre);
-            pageTable.add(paginaRequerida, indexDoFrameLivre);
-            memoriaPrincipal.inserePaginaNaMemoria(paginaRequerida, indexDoFrameLivre);
 
             System.out.println(pageTable.toString());
 
             n -= 1;
         }
+    }
+
+    private void simulaAcesso(){
+    }
+
+    private void carregaPaginaNaMemoriaPrincipal(int indexDoFrameLivre, int paginaRequerida){
+        estrategia.add(indexDoFrameLivre);
+        pageTable.add(paginaRequerida, indexDoFrameLivre);
+        memoriaPrincipal.inserePaginaNaMemoria(paginaRequerida, indexDoFrameLivre);
+    }
+
+    private void substituiPaginaNaMemoriaPrincipal(int indexDoFrameLivre, int paginaRequerida){
+        indexDoFrameLivre = estrategia.remove();
+        pageTable.softRemoveByFrame(indexDoFrameLivre);
+        memoriaPrincipal.removePaginaDaMemoriaPorFrame(indexDoFrameLivre);
+
+        // aqui escreveria de volta oq esta na memoria para o disco/memoria virtual
+
+        carregaPaginaNaMemoriaPrincipal(indexDoFrameLivre, paginaRequerida);
+        
     }
 }

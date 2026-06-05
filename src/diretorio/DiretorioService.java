@@ -16,21 +16,21 @@ public class DiretorioService {
         /* This utility class should not be instantiated */
     }
 
-    public static char[] buscarConteudoPaginaNoDiretorio(int pagina) {
+    public static String buscarConteudoPaginaNoDiretorio(int pagina) {
         if (diretorio == null) {
-            return new char[0];
+            return null;
         }
 
         Path arquivoPagina = diretorio.resolve(pagina + ".pag");
         if (!Files.exists(arquivoPagina)) {
-            return new char[0];
+            return null;
         }
 
         try {
-            return Files.readString(arquivoPagina).toCharArray();
+            return Files.readString(arquivoPagina);
         } catch (IOException e) {
             System.err.println("Erro ao ler página: " + e.getMessage());
-            return new char[0];
+            return null;
         }
     }
 
