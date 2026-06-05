@@ -6,8 +6,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 import diretorio.DiretorioService;
-import estrategiassubstituicaopaginas.GerenciadorMemoria;
 import estrategiassubstituicaopaginas.estrategias.EstrategiaFifo;
+import gerenciadormemoria.GerenciadorMemoria;
 import relatorio.Relatorio;
 
 public class main {
