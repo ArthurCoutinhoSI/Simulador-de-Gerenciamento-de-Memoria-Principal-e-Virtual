@@ -1,5 +1,7 @@
 package memoriaprincipal;
 
+import diretorio.DiretorioService;
+
 public class MemoriaPrincipal {
     private char[][] memoriaPrincipal;
 
@@ -20,10 +22,16 @@ public class MemoriaPrincipal {
         return -1;// memoria principal cheia
     }
 
-    public boolean removeFrameDaMemoriaPrincipal(int frame){
-        if(frame > memoriaPrincipal.length - 1)
+    public void inserePaginaNaMemoria(int paginaRequerida, int indexOfFrameLivre){
+        char[] conteudo = DiretorioService.buscarConteudoPaginaNoDiretorio(paginaRequerida);
+        
+        memoriaPrincipal[indexOfFrameLivre] = conteudo;
+    }
+
+    public boolean removePaginaDaMemoriaPorframe(int frame){
+        if(frame > memoriaPrincipal.length - 1 && frame > 0)
             return false;
-        memoriaPrincipal[frame][0] = '\u0000';
+        memoriaPrincipal[frame][0] = '\u0000'; // nota que a verificação da pagina vazia acontece apenas pelo primeiro caractere realmente
         return true;
     }
 }

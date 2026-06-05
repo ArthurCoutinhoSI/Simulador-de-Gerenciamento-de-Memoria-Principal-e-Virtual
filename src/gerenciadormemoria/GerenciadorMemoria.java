@@ -50,11 +50,14 @@ public class GerenciadorMemoria {
             int indexDoFrameLivre = memoriaPrincipal.getIndexOfFrameLivre();
 
             if(indexDoFrameLivre == -1){ //significa que ta cheio
-                int indexDoFrameremovido = pageTable.softRemove(estrategia.remove());
+                int indexDoFrameremovido = pageTable.softRemoveByFrame(estrategia.remove());
+                memoriaPrincipal.removePaginaDaMemoriaPorframe(indexDoFrameremovido);
+                // aqui escreveria devolta oq esta na memoria para o disco/memoria virtual
             }
 
             estrategia.add(indexDoFrameLivre);
             pageTable.add(paginaRequerida, indexDoFrameLivre);
+            memoriaPrincipal.inserePaginaNaMemoria(paginaRequerida, indexDoFrameLivre);
 
             System.out.println(this.toString());
             System.out.println(n);

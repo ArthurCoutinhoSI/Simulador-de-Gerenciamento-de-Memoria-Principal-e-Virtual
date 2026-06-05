@@ -19,13 +19,12 @@ public class PageTable {
 		return true;
 	}
 
-	public int softRemove(int index){
-		if(index > pageTable.length - 1 || index < 0){
-			return -1;
-		}
+	public int softRemoveByFrame(int frame){
+
+		int index = findIndexOfFrame(frame);
 
 		pageTable[index].setEstaPresente(false);
-		return pageTable[index].getFrame();
+		return index;
 	}
 
 	public int findIndexOfFrame(int frame) {
