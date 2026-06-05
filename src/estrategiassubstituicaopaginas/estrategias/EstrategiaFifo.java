@@ -2,16 +2,20 @@ package estrategiassubstituicaopaginas.estrategias;
 
 import java.util.ArrayList;
 
-import diretorio.DiretorioService;
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
-import pagetable.PageTable;
-import pagetable.PageTableObject;
 
 public class EstrategiaFifo implements EstrategiaSubstituicaoPagina {
-    ArrayList<int> fila;
+    ArrayList<Integer> fila;
 
 	public EstrategiaFifo(){
 		fila = new ArrayList<>();
 	}
 	
+	public void add(int frame){
+		fila.add(frame);
+	}
+
+	public int remove(){
+		return fila.remove(0);
+	}
 }
