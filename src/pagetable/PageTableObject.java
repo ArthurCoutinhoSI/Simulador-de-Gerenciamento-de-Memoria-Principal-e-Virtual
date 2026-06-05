@@ -9,7 +9,7 @@ public class PageTableObject {
         this.estaPresente = false;
     }
 
-    public int getFrames() {
+    public int getFrame() {
         return frame;
     }
 

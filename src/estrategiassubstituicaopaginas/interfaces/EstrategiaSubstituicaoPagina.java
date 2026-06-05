@@ -1,5 +1,7 @@
 package estrategiassubstituicaopaginas.interfaces;
 
+import pagetable.PageTableObject;
+
 public interface EstrategiaSubstituicaoPagina {
-    public int substituirPagina(int pagina, int frame);
+    public int adicionarPagina(int frame);
 }
