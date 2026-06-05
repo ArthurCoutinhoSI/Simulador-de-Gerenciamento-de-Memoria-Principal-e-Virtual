@@ -1,16 +1,8 @@
 package pagesimulator;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Random;
-import java.util.Scanner;
-
-import diretorio.DiretorioService;
-import estrategiassubstituicaopaginas.estrategias.EstrategiaFifo;
 import gerenciadormemoria.GerenciadorMemoria;
-import relatorio.Relatorio;
 
-public class main {
+public class PageSimulator {
     public static void main(String[] args) {
         String diretorio = args[0];
         String estrategia = args[1];

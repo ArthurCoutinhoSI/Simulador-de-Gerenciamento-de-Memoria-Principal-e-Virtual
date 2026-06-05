@@ -8,15 +8,17 @@ import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 import pagetable.PageTable;
 
 public class GerenciadorMemoria {
-    // Estado do sistema (O Contexto é dono disso)
+    // Estado do sistema (contexto do strategy)
     private char[][] memoriaRAM;
     private PageTable pageTable;
     private EstrategiaSubstituicaoPagina estrategia;
+    private Scanner scanner;
 
     public GerenciadorMemoria(String estrategia, int qtdFrames, int paginasUnicas, String diretorio) {
         this.strategyBuilder(estrategia);
         this.memoriaRAM = new char[qtdFrames][10];
         this.pageTable = new PageTable(paginasUnicas);
+        this.scanner = new Scanner(System.in);
         DiretorioService.inicializarArquivosEmDisco(diretorio, paginasUnicas);
     }
 
@@ -34,6 +36,22 @@ public class GerenciadorMemoria {
     }
 
     public void executarSimulacao(int n){
-        
+        while (n > 0){
+            int paginaRequerida = scanner.nextInt();
+
+            System.out.println(this.toString());
+            System.out.println(n);
+
+            n -= 1;
+        }
+    }
+
+    @Override
+    public String toString(){
+        return "GerenciadorMemoria{" +
+                "memoriaRAM=" + memoriaRAM.length + " frames" +
+                ", pageTable=" + pageTable +
+                ", estrategia=" + estrategia +
+                '}';
     }
 }
