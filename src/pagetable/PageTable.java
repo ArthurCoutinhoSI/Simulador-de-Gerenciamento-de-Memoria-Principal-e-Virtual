@@ -6,6 +6,13 @@ public class PageTable {
 
 	public PageTable(int n){
 		this.pageTable = new PageTableObject[n];
+		this.instanciaPageTableObjects(); // isso é necessário pra não ficar um vetor de nulls, já que é um vetor de objetos
+	}
+
+	private void instanciaPageTableObjects(){
+		for (int i = 0; i < pageTable.length; i++) {
+			this.pageTable[i] = new PageTableObject();
+		}
 	}
 
 	public boolean add(int index, int frame){
