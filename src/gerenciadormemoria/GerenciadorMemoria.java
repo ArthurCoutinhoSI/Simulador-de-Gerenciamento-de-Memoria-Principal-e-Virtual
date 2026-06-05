@@ -23,17 +23,17 @@ public class GerenciadorMemoria {
     private void strategyBuilder(String estrategiaString) {
         switch (estrategiaString.toLowerCase()) {
             case "fifo":
-                this.estrategia = new EstrategiaFifo(pageTable.size());
+                this.estrategia = new EstrategiaFifo();
                 break;
             // outros casos para diferentes estratégias de substituição de página podem ser adicionados aqui
             default:
                 System.out.println("Estratégia de substituição de página desconhecida. Usando FIFO por padrão.");
-                this.estrategia = new EstrategiaFifo(pageTable.size());
+                this.estrategia = new EstrategiaFifo();
                 break;
         }
     }
 
-    public void executarSimulacao(){
+    public void executarSimulacao(int n){
         
     }
 }

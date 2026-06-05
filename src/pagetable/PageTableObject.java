@@ -9,6 +9,11 @@ public class PageTableObject {
         this.estaPresente = false;
     }
 
+    public PageTableObject(int frame, boolean estaPresente){
+        this.frame = frame;
+        this.estaPresente = estaPresente;
+    }
+
     public int getFrame() {
         return frame;
     }
@@ -21,7 +26,7 @@ public class PageTableObject {
         this.frame = frame;
     }
 
-    public void setPresente(boolean presente) {
+    public void setEstaPresente(boolean presente) {
         this.estaPresente = presente;
     }
 }
