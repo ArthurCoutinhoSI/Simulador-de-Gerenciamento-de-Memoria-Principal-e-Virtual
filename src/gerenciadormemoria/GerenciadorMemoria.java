@@ -5,6 +5,7 @@ import java.util.Scanner;
 import diretorio.DiretorioService;
 import estrategiassubstituicaopaginas.estrategias.EstrategiaFifo;
 import estrategiassubstituicaopaginas.estrategias.EstrategiaLru;
+import estrategiassubstituicaopaginas.estrategias.leastfrequentlyused.EstrategiaLfu;
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 import memoriaprincipal.MemoriaPrincipal;
 import pagetable.PageTable;
@@ -36,6 +37,10 @@ public class GerenciadorMemoria {
                 this.estrategia = new EstrategiaLru();
                 System.out.println("Estratégia Selecionada: LRU.");
                 break;
+            case "lfu":
+                this.estrategia = new EstrategiaLfu();
+                System.out.println("Estratégia Selecionada: LFU.");
+                break;
             // outros casos para diferentes estratégias de substituição de página podem ser adicionados aqui
             default:
                 System.out.println("Estratégia de substituição de página desconhecida. Usando FIFO por padrão.");
@@ -60,8 +65,10 @@ public class GerenciadorMemoria {
 
             if(indexDoFrameLivre != -1){ //significa que ta memoriaprincipal não ta cheia
                 carregaPaginaNaMemoriaPrincipal(indexDoFrameLivre, paginaRequerida);
+                simulaAcesso(paginaRequerida);
             }else{
                 substituiPaginaNaMemoriaPrincipal(indexDoFrameLivre, paginaRequerida);
+                simulaAcesso(paginaRequerida);
             }
 
 

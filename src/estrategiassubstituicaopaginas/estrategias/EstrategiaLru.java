@@ -20,7 +20,7 @@ public class EstrategiaLru implements EstrategiaSubstituicaoPagina{
     }
 
     public void acessa(int frame){
-        lista.remove(frame);
+        lista.remove(Integer.valueOf(frame));
         lista.addLast(frame);
     }
 }
