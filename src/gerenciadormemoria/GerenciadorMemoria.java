@@ -6,6 +6,7 @@ import diretorio.DiretorioService;
 import estrategiassubstituicaopaginas.estrategias.EstrategiaFifo;
 import estrategiassubstituicaopaginas.estrategias.EstrategiaLru;
 import estrategiassubstituicaopaginas.estrategias.estrategiasbaseadasemcontagem.EstrategiaLfu;
+import estrategiassubstituicaopaginas.estrategias.estrategiasbaseadasemcontagem.EstrategiaMfu;
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 import memoriaprincipal.MemoriaPrincipal;
 import pagetable.PageTable;
@@ -40,6 +41,10 @@ public class GerenciadorMemoria {
             case "lfu":
                 this.estrategia = new EstrategiaLfu();
                 System.out.println("Estratégia Selecionada: LFU.");
+                break;
+            case "mfu":
+                this.estrategia = new EstrategiaMfu();
+                System.out.println("Estratégia Selecionada: MFU.");
                 break;
             // outros casos para diferentes estratégias de substituição de página podem ser adicionados aqui
             default:

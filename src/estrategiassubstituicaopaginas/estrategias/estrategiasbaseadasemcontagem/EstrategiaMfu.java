@@ -1,13 +1,12 @@
 package estrategiassubstituicaopaginas.estrategias.estrategiasbaseadasemcontagem;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 
-public class EstrategiaLfu extends EstrategiasBaseadasEmContagem implements EstrategiaSubstituicaoPagina{
-
-    public EstrategiaLfu(){
+public class EstrategiaMfu extends EstrategiasBaseadasEmContagem implements EstrategiaSubstituicaoPagina{
+    
+    public EstrategiaMfu(){
         super();
     }
 
@@ -15,13 +14,8 @@ public class EstrategiaLfu extends EstrategiasBaseadasEmContagem implements Estr
     protected void incrementaOuDecrementaPorFrameNaLista(int frame){
         for (FrameComContadorDeAcesso frameComContadorDeAcesso : lista) {
             if (frameComContadorDeAcesso.getFrame() == frame) {
-                frameComContadorDeAcesso.incrementaAcesso();
-            }else{
-                if(frameComContadorDeAcesso.getAcessos() > 0) {
-                    frameComContadorDeAcesso.decrementaAcesso();
-                }
-            }
-            
+                frameComContadorDeAcesso.decrementaAcesso();
+            }            
         }
     }
 }

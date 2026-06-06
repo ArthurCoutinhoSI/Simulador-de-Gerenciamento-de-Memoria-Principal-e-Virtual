@@ -3,8 +3,12 @@ package estrategiassubstituicaopaginas.estrategias.estrategiasbaseadasemcontagem
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public abstract class BaseadoEmContagem {
+public abstract class EstrategiasBaseadasEmContagem {
     ArrayList<FrameComContadorDeAcesso> lista;
+
+    public EstrategiasBaseadasEmContagem(){
+        this.lista = new ArrayList<>();
+    }
 
     public void add(int frame){
         FrameComContadorDeAcesso novoFrame = new FrameComContadorDeAcesso(frame);
