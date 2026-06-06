@@ -1,4 +1,4 @@
-package estrategiassubstituicaopaginas.estrategias.leastfrequentlyused;
+package estrategiassubstituicaopaginas.estrategias.estrategiasbaseadasemcontagem;
 
 public class FrameComContadorDeAcesso {
     private int frame;

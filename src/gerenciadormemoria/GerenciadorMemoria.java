@@ -5,7 +5,7 @@ import java.util.Scanner;
 import diretorio.DiretorioService;
 import estrategiassubstituicaopaginas.estrategias.EstrategiaFifo;
 import estrategiassubstituicaopaginas.estrategias.EstrategiaLru;
-import estrategiassubstituicaopaginas.estrategias.leastfrequentlyused.EstrategiaLfu;
+import estrategiassubstituicaopaginas.estrategias.estrategiasbaseadasemcontagem.EstrategiaLfu;
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 import memoriaprincipal.MemoriaPrincipal;
 import pagetable.PageTable;

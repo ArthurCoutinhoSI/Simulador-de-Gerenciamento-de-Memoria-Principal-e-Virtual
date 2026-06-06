@@ -1,11 +1,11 @@
-package estrategiassubstituicaopaginas.estrategias.leastfrequentlyused;
+package estrategiassubstituicaopaginas.estrategias.estrategiasbaseadasemcontagem;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 
-public class EstrategiaLfu implements EstrategiaSubstituicaoPagina{
+public class EstrategiaLfu extends BaseadoEmContagem implements EstrategiaSubstituicaoPagina{
     ArrayList<FrameComContadorDeAcesso> lista;
 
     public EstrategiaLfu(){
@@ -23,11 +23,12 @@ public class EstrategiaLfu implements EstrategiaSubstituicaoPagina{
     }
 
     public void acessa(int frame){
-        this.incrementaPorFrameNaLista(frame);
+        this.incrementaOuDecrementaPorFrameNaLista(frame);
         lista.sort(Comparator.comparingInt(FrameComContadorDeAcesso::getAcessos));
     }
 
-    private void incrementaPorFrameNaLista(int frame){
+    @Override
+    protected void incrementaOuDecrementaPorFrameNaLista(int frame){
         for (FrameComContadorDeAcesso frameComContadorDeAcesso : lista) {
             if (frameComContadorDeAcesso.getFrame() == frame) {
                 frameComContadorDeAcesso.incrementaAcesso();
