@@ -3,19 +3,19 @@ package memoriaprincipal;
 import diretorio.DiretorioService;
 
 public class MemoriaPrincipal {
-    private char[][] memoriaPrincipal;
+    private char[][] memoria;
 
     public MemoriaPrincipal(int qtdFrames){
-        this.memoriaPrincipal = new char[qtdFrames][10];
+        this.memoria = new char[qtdFrames][10];
     }
 
     public char[][] getMemoriaPrincipal(){
-        return this.memoriaPrincipal;
+        return this.memoria;
     }
 
     public int getIndexOfFrameLivre(){
-        for (int i = 0; i < memoriaPrincipal.length; i++) {
-            if(this.memoriaPrincipal[i][0] == '\u0000') {
+        for (int i = 0; i < memoria.length; i++) {
+            if(this.memoria[i][0] == '\u0000') {
                 return i;
             }
         }
@@ -25,13 +25,13 @@ public class MemoriaPrincipal {
     public void inserePaginaNaMemoria(int paginaRequerida, int indexDoFrameLivre){
         String conteudo = DiretorioService.buscarConteudoPaginaNoDiretorio(paginaRequerida);
         
-        memoriaPrincipal[indexDoFrameLivre] = conteudo.toCharArray();
+        memoria[indexDoFrameLivre] = conteudo.toCharArray();
     }
 
     public boolean removePaginaDaMemoriaPorFrame(int frame){
-        if(frame > this.memoriaPrincipal.length - 1 && frame > 0)
+        if(frame > this.memoria.length - 1 && frame > 0)
             return false;
-        this.memoriaPrincipal[frame][0] = '\u0000'; // nota que a verificação da pagina vazia acontece apenas pelo primeiro caractere realmente
+        this.memoria[frame][0] = '\u0000'; // nota que a verificação da pagina vazia acontece apenas pelo primeiro caractere realmente
         return true;
     }
 }

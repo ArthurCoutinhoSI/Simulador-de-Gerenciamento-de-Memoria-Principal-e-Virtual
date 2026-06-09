@@ -1,8 +1,5 @@
 package estrategiassubstituicaopaginas.estrategias.estrategiasbaseadasemcontagem;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 
 public class EstrategiaLfu extends EstrategiasBaseadasEmContagem implements EstrategiaSubstituicaoPagina{
@@ -21,7 +18,6 @@ public class EstrategiaLfu extends EstrategiasBaseadasEmContagem implements Estr
                     frameComContadorDeAcesso.decrementaAcesso();
                 }
             }
-            
         }
     }
 }

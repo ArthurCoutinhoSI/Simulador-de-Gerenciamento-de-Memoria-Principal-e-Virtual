@@ -6,7 +6,7 @@ import java.util.Comparator;
 public abstract class EstrategiasBaseadasEmContagem {
     ArrayList<FrameComContadorDeAcesso> lista;
 
-    public EstrategiasBaseadasEmContagem(){
+    protected EstrategiasBaseadasEmContagem(){
         this.lista = new ArrayList<>();
     }
 

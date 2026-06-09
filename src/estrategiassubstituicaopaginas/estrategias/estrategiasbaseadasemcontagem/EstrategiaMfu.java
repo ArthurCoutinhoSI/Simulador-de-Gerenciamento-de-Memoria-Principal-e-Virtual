@@ -1,7 +1,5 @@
 package estrategiassubstituicaopaginas.estrategias.estrategiasbaseadasemcontagem;
 
-import java.util.Comparator;
-
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 
 public class EstrategiaMfu extends EstrategiasBaseadasEmContagem implements EstrategiaSubstituicaoPagina{

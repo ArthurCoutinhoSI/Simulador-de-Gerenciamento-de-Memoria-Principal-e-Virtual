@@ -1,7 +1,4 @@
 package pagetable;
-
-import diretorio.DiretorioService;
-
 public class PageTable {
 	// tabela hash do diretorio
 	PageTableObject[] pageTableObjects;
