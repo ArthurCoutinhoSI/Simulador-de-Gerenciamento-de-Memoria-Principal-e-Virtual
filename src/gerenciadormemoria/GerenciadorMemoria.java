@@ -66,7 +66,7 @@ public class GerenciadorMemoria {
             int paginaRequerida = scanner.nextInt();
 
             // faz o tratamento de erro na mão msm
-            if(paginaRequerida < 0 || paginaRequerida > qtdPaginasUnicas) {
+            if(paginaRequerida < 0 || paginaRequerida > qtdPaginasUnicas - 1 ) {
                 System.err.println("Não é possível acessar pagina fora dos limites 0 e " + qtdPaginasUnicas);
                 continue;
             }
