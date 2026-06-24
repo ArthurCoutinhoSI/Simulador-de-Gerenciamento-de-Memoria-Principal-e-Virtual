@@ -16,6 +16,7 @@ public class GerenciadorMemoria {
     // estado do sistema (contexto do strategy)
     private MemoriaPrincipal memoriaPrincipal;
     private PageTable pageTable;
+    private int qtdPaginasUnicas;
     private EstrategiaSubstituicaoPagina estrategia;
 
     private int contaFalhasDePagina = 0;
@@ -27,6 +28,7 @@ public class GerenciadorMemoria {
         this.strategyBuilder(estrategia);
         this.memoriaPrincipal = new MemoriaPrincipal(qtdFrames);
         this.pageTable = new PageTable(paginasUnicas);
+        this.qtdPaginasUnicas = paginasUnicas;
         DiretorioService.inicializarArquivosEmDisco(diretorio, paginasUnicas);
         
         this.scanner = new Scanner(System.in);
@@ -62,6 +64,12 @@ public class GerenciadorMemoria {
     public void executarSimulacao(int n){
         while (n > 0){
             int paginaRequerida = scanner.nextInt();
+
+            // faz o tratamento de erro na mão msm
+            if(paginaRequerida < 0 || paginaRequerida > qtdPaginasUnicas) {
+                System.err.println("Não é possível acessar pagina fora dos limites 0 e " + qtdPaginasUnicas);
+                continue;
+            }
 
             this.sequenciaDeRequisicaoDePaginas.addLast(paginaRequerida);
 
