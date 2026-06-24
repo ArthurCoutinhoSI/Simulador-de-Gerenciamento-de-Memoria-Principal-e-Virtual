@@ -3,9 +3,11 @@ package estrategiassubstituicaopaginas.estrategias.estrategiasbaseadasemcontagem
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 
 public class EstrategiaLfu extends EstrategiasBaseadasEmContagem implements EstrategiaSubstituicaoPagina{
+    String nome;
 
     public EstrategiaLfu(){
         super();
+        nome = "LFU";
     }
 
     @Override
@@ -19,5 +21,9 @@ public class EstrategiaLfu extends EstrategiasBaseadasEmContagem implements Estr
                 }
             }
         }
+    }
+
+    public String getNome() {
+        return nome;
     }
 }

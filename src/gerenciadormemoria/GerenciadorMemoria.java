@@ -63,11 +63,14 @@ public class GerenciadorMemoria {
         while (n > 0){
             int paginaRequerida = scanner.nextInt();
 
+            this.sequenciaDeRequisicaoDePaginas.addLast(paginaRequerida);
+
             System.out.println("Página Requerida: " + paginaRequerida);
 
+            // simula acesso caso pagina já esteja carregada na memória principal
             if(pageTable.getFrameByIndex(paginaRequerida) != -1){
                 simulaAcesso(paginaRequerida);
-                System.out.println(this.relatorio());
+                System.out.println(this.relatorioDoAcessoUnico());
                 continue;
             }
 
@@ -77,15 +80,17 @@ public class GerenciadorMemoria {
                 carregaPaginaNaMemoriaPrincipal(indexDoFrameLivre, paginaRequerida);
                 simulaAcesso(paginaRequerida);
             }else{
+                this.contaFalhasDePagina++;
                 substituiPaginaNaMemoriaPrincipal(indexDoFrameLivre, paginaRequerida);
                 simulaAcesso(paginaRequerida);
             }
 
 
-            System.out.println(this.relatorio());
+            System.out.println(this.relatorioDoAcessoUnico());
 
             n -= 1;
         }
+        System.out.println(relatorioFinal());
     }
 
     private void simulaAcesso(int paginaRequerida){
@@ -109,7 +114,7 @@ public class GerenciadorMemoria {
         carregaPaginaNaMemoriaPrincipal(indexDoFrameLivre, paginaRequerida);
     }
 
-    private String relatorio(){
+    private String relatorioDoAcessoUnico(){
         StringBuilder sb = new StringBuilder();
 
 		sb.append("Frame\t\tPágina\t\tConteúdo\n");
@@ -123,5 +128,22 @@ public class GerenciadorMemoria {
 		}
 		
 		return sb.toString();
+    }
+
+    private String relatorioFinal() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Algoritmo de Substituição de Páginas: ");
+        sb.append(estrategia.getNome());
+        sb.append("\n");
+        sb.append("Sequência de Requisição: ");
+        sb.append(sequenciaDeRequisicaoDePaginas.toString());
+        sb.append("\n");
+        sb.append("Total de Falhas de Página: ");
+        sb.append(contaFalhasDePagina);
+        sb.append("\n");
+        
+
+        return sb.toString();
     }
 }

@@ -6,9 +6,11 @@ import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 
 public class EstrategiaFifo implements EstrategiaSubstituicaoPagina {
     ArrayList<Integer> fila;
+	String nome;
 
 	public EstrategiaFifo(){
 		fila = new ArrayList<>();
+		nome = "FIFO";
 	}
 	
 	public void add(int frame){
@@ -24,5 +26,9 @@ public class EstrategiaFifo implements EstrategiaSubstituicaoPagina {
 
 	public void acessa(int frame){
 		// não faz nada
+	}
+
+	public String getNome() {
+		return nome;
 	}
 }
