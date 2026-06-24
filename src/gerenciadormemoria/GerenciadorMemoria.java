@@ -1,5 +1,6 @@
 package gerenciadormemoria;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import diretorio.DiretorioService;
@@ -12,10 +13,13 @@ import memoriaprincipal.MemoriaPrincipal;
 import pagetable.PageTable;
 
 public class GerenciadorMemoria {
-    // Estado do sistema (contexto do strategy)
+    // estado do sistema (contexto do strategy)
     private MemoriaPrincipal memoriaPrincipal;
     private PageTable pageTable;
     private EstrategiaSubstituicaoPagina estrategia;
+
+    private int contaFalhasDePagina = 0;
+    private ArrayList<Integer> sequenciaDeRequisicaoDePaginas = new ArrayList<>();
 
     private Scanner scanner;
 
@@ -29,20 +33,21 @@ public class GerenciadorMemoria {
     }
 
     private void strategyBuilder(String estrategiaString) {
-        switch (estrategiaString.toLowerCase()) {
-            case "fifo":
+        estrategiaString = estrategiaString.toUpperCase();
+        switch (estrategiaString) {
+            case "FIFO":
                 this.estrategia = new EstrategiaFifo();
                 System.out.println("Estratégia Selecionada: FIFO.");
                 break;
-            case "lru":
+            case "LRU":
                 this.estrategia = new EstrategiaLru();
                 System.out.println("Estratégia Selecionada: LRU.");
                 break;
-            case "lfu":
+            case "LFU":
                 this.estrategia = new EstrategiaLfu();
                 System.out.println("Estratégia Selecionada: LFU.");
                 break;
-            case "mfu":
+            case "MFU":
                 this.estrategia = new EstrategiaMfu();
                 System.out.println("Estratégia Selecionada: MFU.");
                 break;
