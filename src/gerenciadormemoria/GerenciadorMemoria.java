@@ -79,6 +79,7 @@ public class GerenciadorMemoria {
             if(pageTable.getFrameByIndex(paginaRequerida) != -1){
                 simulaAcesso(paginaRequerida);
                 System.out.println(this.relatorioDoAcessoUnico());
+                n -= 1;
                 continue;
             }
 
@@ -100,7 +101,6 @@ public class GerenciadorMemoria {
         }
         System.out.println(relatorioFinal());
     }
-
     private void simulaAcesso(int paginaRequerida){
         int frame = pageTable.getFrameByIndex(paginaRequerida);
         estrategia.acessa(frame);
