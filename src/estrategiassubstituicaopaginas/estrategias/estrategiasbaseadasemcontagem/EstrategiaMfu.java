@@ -3,9 +3,11 @@ package estrategiassubstituicaopaginas.estrategias.estrategiasbaseadasemcontagem
 import estrategiassubstituicaopaginas.interfaces.EstrategiaSubstituicaoPagina;
 
 public class EstrategiaMfu extends EstrategiasBaseadasEmContagem implements EstrategiaSubstituicaoPagina{
-    
+    String nome;
+
     public EstrategiaMfu(){
         super();
+        nome = "MFU";
     }
 
     @Override
@@ -15,5 +17,9 @@ public class EstrategiaMfu extends EstrategiasBaseadasEmContagem implements Estr
                 frameComContadorDeAcesso.decrementaAcesso();
             }            
         }
+    }
+
+    public String getNome() {
+        return nome;
     }
 }

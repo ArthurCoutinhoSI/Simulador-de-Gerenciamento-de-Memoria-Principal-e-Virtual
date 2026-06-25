@@ -1,5 +1,6 @@
 package gerenciadormemoria;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import diretorio.DiretorioService;
@@ -12,10 +13,14 @@ import memoriaprincipal.MemoriaPrincipal;
 import pagetable.PageTable;
 
 public class GerenciadorMemoria {
-    // Estado do sistema (contexto do strategy)
+    // estado do sistema (contexto do strategy)
     private MemoriaPrincipal memoriaPrincipal;
     private PageTable pageTable;
+    private int qtdPaginasUnicas;
     private EstrategiaSubstituicaoPagina estrategia;
+
+    private int contaFalhasDePagina = 0;
+    private ArrayList<Integer> sequenciaDeRequisicaoDePaginas = new ArrayList<>();
 
     private Scanner scanner;
 
@@ -23,26 +28,28 @@ public class GerenciadorMemoria {
         this.strategyBuilder(estrategia);
         this.memoriaPrincipal = new MemoriaPrincipal(qtdFrames);
         this.pageTable = new PageTable(paginasUnicas);
+        this.qtdPaginasUnicas = paginasUnicas;
         DiretorioService.inicializarArquivosEmDisco(diretorio, paginasUnicas);
         
         this.scanner = new Scanner(System.in);
     }
 
     private void strategyBuilder(String estrategiaString) {
-        switch (estrategiaString.toLowerCase()) {
-            case "fifo":
+        estrategiaString = estrategiaString.toUpperCase();
+        switch (estrategiaString) {
+            case "FIFO":
                 this.estrategia = new EstrategiaFifo();
                 System.out.println("Estratégia Selecionada: FIFO.");
                 break;
-            case "lru":
+            case "LRU":
                 this.estrategia = new EstrategiaLru();
                 System.out.println("Estratégia Selecionada: LRU.");
                 break;
-            case "lfu":
+            case "LFU":
                 this.estrategia = new EstrategiaLfu();
                 System.out.println("Estratégia Selecionada: LFU.");
                 break;
-            case "mfu":
+            case "MFU":
                 this.estrategia = new EstrategiaMfu();
                 System.out.println("Estratégia Selecionada: MFU.");
                 break;
@@ -58,11 +65,21 @@ public class GerenciadorMemoria {
         while (n > 0){
             int paginaRequerida = scanner.nextInt();
 
+            // faz o tratamento de erro na mão msm
+            if(paginaRequerida < 0 || paginaRequerida > qtdPaginasUnicas - 1 ) {
+                System.err.println("Não é possível acessar pagina fora dos limites 0 e " + qtdPaginasUnicas);
+                continue;
+            }
+
+            this.sequenciaDeRequisicaoDePaginas.addLast(paginaRequerida);
+
             System.out.println("Página Requerida: " + paginaRequerida);
 
+            // simula acesso caso pagina já esteja carregada na memória principal
             if(pageTable.getFrameByIndex(paginaRequerida) != -1){
                 simulaAcesso(paginaRequerida);
-                System.out.println(this.relatorio());
+                System.out.println(this.relatorioDoAcessoUnico());
+                n -= 1;
                 continue;
             }
 
@@ -72,17 +89,18 @@ public class GerenciadorMemoria {
                 carregaPaginaNaMemoriaPrincipal(indexDoFrameLivre, paginaRequerida);
                 simulaAcesso(paginaRequerida);
             }else{
+                this.contaFalhasDePagina++;
                 substituiPaginaNaMemoriaPrincipal(indexDoFrameLivre, paginaRequerida);
                 simulaAcesso(paginaRequerida);
             }
 
 
-            System.out.println(this.relatorio());
+            System.out.println(this.relatorioDoAcessoUnico());
 
             n -= 1;
         }
+        System.out.println(relatorioFinal());
     }
-
     private void simulaAcesso(int paginaRequerida){
         int frame = pageTable.getFrameByIndex(paginaRequerida);
         estrategia.acessa(frame);
@@ -104,7 +122,7 @@ public class GerenciadorMemoria {
         carregaPaginaNaMemoriaPrincipal(indexDoFrameLivre, paginaRequerida);
     }
 
-    private String relatorio(){
+    private String relatorioDoAcessoUnico(){
         StringBuilder sb = new StringBuilder();
 
 		sb.append("Frame\t\tPágina\t\tConteúdo\n");
@@ -118,5 +136,22 @@ public class GerenciadorMemoria {
 		}
 		
 		return sb.toString();
+    }
+
+    private String relatorioFinal() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Algoritmo de Substituição de Páginas: ");
+        sb.append(estrategia.getNome());
+        sb.append("\n");
+        sb.append("Sequência de Requisição: ");
+        sb.append(sequenciaDeRequisicaoDePaginas.toString());
+        sb.append("\n");
+        sb.append("Total de Falhas de Página: ");
+        sb.append(contaFalhasDePagina);
+        sb.append("\n");
+        
+
+        return sb.toString();
     }
 }
